@@ -57,7 +57,8 @@ namespace TCP_Server
                 }
                 listBox1.Items.Add("Komunikat został wysłany!");
                 listBox1.Update();
-                
+                newSocket.Close(); //zrywamy połączenie z klientem
+
 
             }
             catch
@@ -74,7 +75,6 @@ namespace TCP_Server
 
         private void stop_button_Click(object sender, EventArgs e)
         {
-            newSocket.Close(); //zrywamy połączenie z klientem
             serwer.Stop();
             start_button.Enabled = true;
             stop_button.Enabled = false;
