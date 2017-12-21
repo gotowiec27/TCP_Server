@@ -61,8 +61,9 @@ namespace TCP_Server
 
 
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 listBox1.Items.Add("błąd transmisji..");
                 listBox1.Update();
             }
