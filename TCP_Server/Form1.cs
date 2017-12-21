@@ -46,18 +46,19 @@ namespace TCP_Server
                 start_button.Enabled = false;
                 stop_button.Enabled = true;
 
-                newSocket = await serwer.AcceptSocketAsync();  //akceptacja klienta na kanale komunikacyjnym
-                if (newSocket.Connected)
+                newSocket = await serwer.AcceptSocketAsync();
+                while (newSocket.Connected)
                 {
                     NetworkStream ns = new NetworkStream(newSocket);
-                    byte[] buf = Encoding.ASCII.GetBytes(comment_box.Text); // string zamieniamy na kod ASCII
+                    byte[] buf = Encoding.ASCII.GetBytes(comment_box.Text);
                     ns.Write(buf, 0, buf.Length);
-                    ns.Flush();  //wyzwolenie transmisji
+                    ns.Flush();
                     ns.Close();
+                    listBox1.Items.Add("Komunikat został wysłany!");
+                    listBox1.Update();
+                    newSocket.Close();
                 }
-                listBox1.Items.Add("Komunikat został wysłany!");
-                listBox1.Update();
-                newSocket.Close(); //zrywamy połączenie z klientem
+                
 
 
             }
