@@ -47,6 +47,7 @@
             this.comment_box.Name = "comment_box";
             this.comment_box.Size = new System.Drawing.Size(255, 20);
             this.comment_box.TabIndex = 0;
+            this.comment_box.Text = "Test";
             // 
             // port_box
             // 
@@ -119,6 +120,7 @@
             this.ip_box.Name = "ip_box";
             this.ip_box.Size = new System.Drawing.Size(183, 20);
             this.ip_box.TabIndex = 7;
+            this.ip_box.Text = "0.0.0.0";
             // 
             // label3
             // 
@@ -130,7 +132,6 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Message:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // TCP_Server
             // 

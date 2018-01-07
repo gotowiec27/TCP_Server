@@ -18,8 +18,9 @@ namespace TCP_Server
         {
             InitializeComponent();
         }
-        private TcpListener serwer;
+        private TcpListener server;
         Socket newSocket;
+        int random_port;
         private async void start_button_ClickAsync(object sender, EventArgs e)
         {
             IPAddress adresIP;
@@ -34,19 +35,19 @@ namespace TCP_Server
                 return;
             }
 
-            int port = Convert.ToInt16(port_box.Value);
+            int port = Convert.ToInt32(port_box.Value);
             
             try
             {
-                serwer = new TcpListener(adresIP, port);
-                serwer.Start();
+                server = new TcpListener(adresIP, port);
+                server.Start();
                 listBox1.Items.Add("Nasłuchiwanie rozpoczęte...");
                 listBox1.Update();
 
                 start_button.Enabled = false;
                 stop_button.Enabled = true;
 
-                newSocket = await serwer.AcceptSocketAsync();
+                newSocket = await server.AcceptSocketAsync();
                 while (newSocket.Connected)
                 {
                     NetworkStream ns = new NetworkStream(newSocket);
@@ -59,12 +60,10 @@ namespace TCP_Server
                     newSocket.Close();
                 }
                 
-
-
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
                 listBox1.Items.Add("błąd transmisji..");
                 listBox1.Update();
             }
@@ -72,20 +71,19 @@ namespace TCP_Server
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Random random = new Random();
+            random_port = random.Next(1023,50000);
+            port_box.Value = random_port;
+            stop_button.Enabled = false;
         }
 
         private void stop_button_Click(object sender, EventArgs e)
         {
-            serwer.Stop();
-            start_button.Enabled = true;
-            stop_button.Enabled = false;
-            comment_box.Text = String.Empty;
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+                server.Stop();
+                start_button.Enabled = true;
+                stop_button.Enabled = false;
+                comment_box.Text = String.Empty;
+          
         }
     }
 }
