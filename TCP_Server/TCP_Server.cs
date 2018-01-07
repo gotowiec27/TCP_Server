@@ -12,9 +12,9 @@ using System.Net;
 
 namespace TCP_Server
 {
-    public partial class Form1 : Form
+    public partial class TCP_Server : Form
     {
-        public Form1()
+        public TCP_Server()
         {
             InitializeComponent();
         }
@@ -81,6 +81,11 @@ namespace TCP_Server
             start_button.Enabled = true;
             stop_button.Enabled = false;
             comment_box.Text = String.Empty;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
